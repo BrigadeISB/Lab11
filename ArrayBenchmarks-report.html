@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>ArrayBenchmarks-20240527-103323</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+
+<link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet v0.13.12, Windows 10 (10.0.19045.4412/22H2/2022Update)
+12th Gen Intel Core i5-12450H, 1 CPU, 12 logical and 8 physical cores
+.NET SDK 9.0.100-preview.3.24204.13
+  [Host]     : .NET 5.0.17 (5.0.1722.21314), X64 RyuJIT AVX2
+  Job-GMMAEE : .NET 5.0.17 (5.0.1722.21314), X64 RyuJIT AVX2
+</code></pre>
+<pre><code>IterationCount=10  RunStrategy=Throughput  WarmupCount=5  
+</code></pre>
+
+<table>
+<thead><tr><th>Method</th><th>N</th><th>ArrayType</th><th>Mean    </th><th>Error    </th><th>StdDev </th><th>Gen0</th><th>Gen1</th><th>Gen2</th><th>Allocated</th>
+</tr>
+</thead><tbody><tr><td>HeapSort</td><td>1000</td><td>Random</td><td>316.3 ns</td><td>19.18 ns</td><td>12.68 ns</td><td>0.0061</td><td>-</td><td>-</td><td>40 B</td>
+</tr><tr><td>SmoothSort</td><td>1000</td><td>Random</td><td>784.0 ns</td><td>62.07 ns</td><td>41.06 ns</td><td>0.0061</td><td>-</td><td>-</td><td>40 B</td>
+</tr><tr><td>QuickSort</td><td>1000</td><td>Random</td><td>242.0 ns</td><td>10.83 ns</td><td>6.44 ns</td><td>0.0125</td><td>-</td><td>-</td><td>80 B</td>
+</tr><tr><td>HeapSort</td><td>1000</td><td>PartiallySorted</td><td>316.0 ns</td><td>30.94 ns</td><td>16.18 ns</td><td>0.0061</td><td>-</td><td>-</td><td>40 B</td>
+</tr><tr><td>SmoothSort</td><td>1000</td><td>PartiallySorted</td><td>802.2 ns</td><td>282.98 ns</td><td>187.17 ns</td><td>0.0061</td><td>-</td><td>-</td><td>40 B</td>
+</tr><tr><td>QuickSort</td><td>1000</td><td>PartiallySorted</td><td>552.8 ns</td><td>265.39 ns</td><td>175.54 ns</td><td>0.0125</td><td>-</td><td>-</td><td>80 B</td>
+</tr><tr><td>HeapSort</td><td>1000</td><td>ManyDuplicates</td><td>313.8 ns</td><td>27.25 ns</td><td>14.25 ns</td><td>0.0061</td><td>-</td><td>-</td><td>40 B</td>
+</tr><tr><td>SmoothSort</td><td>1000</td><td>ManyDuplicates</td><td>984.0 ns</td><td>326.43 ns</td><td>215.91 ns</td><td>0.0061</td><td>-</td><td>-</td><td>40 B</td>
+</tr><tr><td>QuickSort</td><td>1000</td><td>ManyDuplicates</td><td>433.8 ns</td><td>188.34 ns</td><td>98.51 ns</td><td>0.0125</td><td>-</td><td>-</td><td>80 B</td>
+</tr><tr><td>HeapSort</td><td>5000</td><td>Random</td><td>4,017.5 ns</td><td>1,084.17 ns</td><td>717.11 ns</td><td>0.0293</td><td>-</td><td>-</td><td>200 B</td>
+</tr><tr><td>SmoothSort</td><td>5000</td><td>Random</td><td>6,799.8 ns</td><td>1,657.70 ns</td><td>1,096.47 ns</td><td>0.0293</td><td>-</td><td>-</td><td>200 B</td>
+</tr><tr><td>QuickSort</td><td>5000</td><td>Random</td><td>5,136.8 ns</td><td>1,086.12 ns</td><td>718.40 ns</td><td>0.0635</td><td>-</td><td>-</td><td>400 B</td>
+</tr><tr><td>HeapSort</td><td>5000</td><td>PartiallySorted</td><td>3,916.1 ns</td><td>1,282.49 ns</td><td>848.29 ns</td><td>0.0293</td><td>-</td><td>-</td><td>200 B</td>
+</tr><tr><td>SmoothSort</td><td>5000</td><td>PartiallySorted</td><td>6,453.4 ns</td><td>2,082.92 ns</td><td>1,377.72 ns</td><td>0.0293</td><td>-</td><td>-</td><td>200 B</td>
+</tr><tr><td>QuickSort</td><td>5000</td><td>PartiallySorted</td><td>4,689.6 ns</td><td>1,093.03 ns</td><td>722.97 ns</td><td>0.0635</td><td>-</td><td>-</td><td>400 B</td>
+</tr><tr><td>HeapSort</td><td>5000</td><td>ManyDuplicates</td><td>4,360.2 ns</td><td>1,067.67 ns</td><td>706.20 ns</td><td>0.0293</td><td>-</td><td>-</td><td>200 B</td>
+</tr><tr><td>SmoothSort</td><td>5000</td><td>ManyDuplicates</td><td>8,544.9 ns</td><td>1,510.13 ns</td><td>998.86 ns</td><td>0.0293</td><td>-</td><td>-</td><td>200 B</td>
+</tr><tr><td>QuickSort</td><td>5000</td><td>ManyDuplicates</td><td>5,428.0 ns</td><td>1,685.35 ns</td><td>1,114.75 ns</td><td>0.0635</td><td>-</td><td>-</td><td>400 B</td>
+</tr><tr><td>HeapSort</td><td>25000</td><td>Random</td><td>25,952.7 ns</td><td>5,791.75 ns</td><td>3,830.88 ns</td><td>0.2734</td><td>0.2734</td><td>0.2734</td><td>1000 B</td>
+</tr><tr><td>SmoothSort</td><td>25000</td><td>Random</td><td>51,618.4 ns</td><td>9,775.90 ns</td><td>6,466.15 ns</td><td>0.2344</td><td>0.2344</td><td>0.2344</td><td>1000 B</td>
+</tr><tr><td>QuickSort</td><td>25000</td><td>Random</td><td>37,573.3 ns</td><td>4,612.56 ns</td><td>3,050.93 ns</td><td>0.5859</td><td>0.5859</td><td>0.5859</td><td>2000 B</td>
+</tr><tr><td>HeapSort</td><td>25000</td><td>PartiallySorted</td><td>20,237.4 ns</td><td>1,640.11 ns</td><td>857.81 ns</td><td>0.2734</td><td>0.2734</td><td>0.2734</td><td>1000 B</td>
+</tr><tr><td>SmoothSort</td><td>25000</td><td>PartiallySorted</td><td>44,619.2 ns</td><td>8,496.47 ns</td><td>5,619.89 ns</td><td>0.2734</td><td>0.2734</td><td>0.2734</td><td>1000 B</td>
+</tr><tr><td>QuickSort</td><td>25000</td><td>PartiallySorted</td><td>25,807.6 ns</td><td>6,675.49 ns</td><td>4,415.42 ns</td><td>0.5859</td><td>0.5859</td><td>0.5859</td><td>2000 B</td>
+</tr><tr><td>HeapSort</td><td>25000</td><td>ManyDuplicates</td><td>20,214.7 ns</td><td>1,363.60 ns</td><td>713.19 ns</td><td>0.2734</td><td>0.2734</td><td>0.2734</td><td>1000 B</td>
+</tr><tr><td>SmoothSort</td><td>25000</td><td>ManyDuplicates</td><td>49,449.6 ns</td><td>7,764.74 ns</td><td>4,620.67 ns</td><td>0.2734</td><td>0.2734</td><td>0.2734</td><td>1000 B</td>
+</tr><tr><td>QuickSort</td><td>25000</td><td>ManyDuplicates</td><td>29,429.5 ns</td><td>7,392.39 ns</td><td>4,889.61 ns</td><td>0.5859</td><td>0.5859</td><td>0.5859</td><td>2000 B</td>
+</tr><tr><td>HeapSort</td><td>50000</td><td>Random</td><td>49,740.6 ns</td><td>12,885.82 ns</td><td>8,523.17 ns</td><td>0.5469</td><td>0.5469</td><td>0.5469</td><td>2000 B</td>
+</tr><tr><td>SmoothSort</td><td>50000</td><td>Random</td><td>111,601.8 ns</td><td>11,385.38 ns</td><td>6,775.26 ns</td><td>0.5469</td><td>0.5469</td><td>0.5469</td><td>2000 B</td>
+</tr><tr><td>QuickSort</td><td>50000</td><td>Random</td><td>70,073.6 ns</td><td>16,797.58 ns</td><td>11,110.56 ns</td><td>1.1719</td><td>1.1719</td><td>1.1719</td><td>4000 B</td>
+</tr><tr><td>HeapSort</td><td>50000</td><td>PartiallySorted</td><td>37,434.1 ns</td><td>1,580.00 ns</td><td>826.37 ns</td><td>0.5469</td><td>0.5469</td><td>0.5469</td><td>2000 B</td>
+</tr><tr><td>SmoothSort</td><td>50000</td><td>PartiallySorted</td><td>96,577.6 ns</td><td>17,931.55 ns</td><td>11,860.61 ns</td><td>0.5469</td><td>0.5469</td><td>0.5469</td><td>2000 B</td>
+</tr><tr><td>QuickSort</td><td>50000</td><td>PartiallySorted</td><td>57,454.0 ns</td><td>15,636.37 ns</td><td>10,342.49 ns</td><td>1.1719</td><td>1.1719</td><td>1.1719</td><td>4000 B</td>
+</tr><tr><td>HeapSort</td><td>50000</td><td>ManyDuplicates</td><td>49,725.6 ns</td><td>11,610.96 ns</td><td>7,679.93 ns</td><td>0.5469</td><td>0.5469</td><td>0.5469</td><td>2000 B</td>
+</tr><tr><td>SmoothSort</td><td>50000</td><td>ManyDuplicates</td><td>111,400.4 ns</td><td>11,922.00 ns</td><td>7,885.67 ns</td><td>0.5469</td><td>0.5469</td><td>0.5469</td><td>2000 B</td>
+</tr><tr><td>QuickSort</td><td>50000</td><td>ManyDuplicates</td><td>62,795.5 ns</td><td>14,468.20 ns</td><td>9,569.82 ns</td><td>1.1719</td><td>1.1719</td><td>1.1719</td><td>4000 B</td>
+</tr><tr><td>HeapSort</td><td>100000</td><td>Random</td><td>108,808.8 ns</td><td>32,015.58 ns</td><td>21,176.32 ns</td><td>1.0938</td><td>1.0938</td><td>1.0938</td><td>4000 B</td>
+</tr><tr><td>SmoothSort</td><td>100000</td><td>Random</td><td>159,164.0 ns</td><td>1,251.18 ns</td><td>654.39 ns</td><td>0.9375</td><td>0.9375</td><td>0.9375</td><td>4000 B</td>
+</tr><tr><td>QuickSort</td><td>100000</td><td>Random</td><td>150,980.3 ns</td><td>34,329.61 ns</td><td>22,706.91 ns</td><td>2.3438</td><td>2.3438</td><td>2.3438</td><td>8001 B</td>
+</tr><tr><td>HeapSort</td><td>100000</td><td>PartiallySorted</td><td>82,984.4 ns</td><td>5,836.77 ns</td><td>3,052.74 ns</td><td>1.0938</td><td>1.0938</td><td>1.0938</td><td>4000 B</td>
+</tr><tr><td>SmoothSort</td><td>100000</td><td>PartiallySorted</td><td>209,238.5 ns</td><td>31,079.01 ns</td><td>20,556.84 ns</td><td>1.0938</td><td>1.0938</td><td>1.0938</td><td>4000 B</td>
+</tr><tr><td>QuickSort</td><td>100000</td><td>PartiallySorted</td><td>127,004.5 ns</td><td>31,980.01 ns</td><td>21,152.80 ns</td><td>2.3438</td><td>2.3438</td><td>2.3438</td><td>8001 B</td>
+</tr><tr><td>HeapSort</td><td>100000</td><td>ManyDuplicates</td><td>110,448.5 ns</td><td>29,467.47 ns</td><td>19,490.90 ns</td><td>1.0938</td><td>1.0938</td><td>1.0938</td><td>4000 B</td>
+</tr><tr><td>SmoothSort</td><td>100000</td><td>ManyDuplicates</td><td>165,196.6 ns</td><td>8,655.17 ns</td><td>4,526.82 ns</td><td>0.9375</td><td>0.9375</td><td>0.9375</td><td>4000 B</td>
+</tr><tr><td>QuickSort</td><td>100000</td><td>ManyDuplicates</td><td>132,320.2 ns</td><td>28,556.77 ns</td><td>18,888.54 ns</td><td>2.3438</td><td>2.3438</td><td>2.3438</td><td>8001 B</td>
+</tr><tr><td>HeapSort</td><td>1000000</td><td>Random</td><td>1,211,481.2 ns</td><td>55,167.44 ns</td><td>28,853.64 ns</td><td>-</td><td>-</td><td>-</td><td>40001 B</td>
+</tr><tr><td>SmoothSort</td><td>1000000</td><td>Random</td><td>2,622,555.0 ns</td><td>887,653.07 ns</td><td>587,127.54 ns</td><td>-</td><td>-</td><td>-</td><td>40001 B</td>
+</tr><tr><td>QuickSort</td><td>1000000</td><td>Random</td><td>1,607,046.9 ns</td><td>345,864.43 ns</td><td>228,767.91 ns</td><td>5.7143</td><td>5.7143</td><td>5.7143</td><td>80016 B</td>
+</tr><tr><td>HeapSort</td><td>1000000</td><td>PartiallySorted</td><td>1,116,392.9 ns</td><td>321,499.95 ns</td><td>212,652.31 ns</td><td>2.0000</td><td>2.0000</td><td>2.0000</td><td>40001 B</td>
+</tr><tr><td>SmoothSort</td><td>1000000</td><td>PartiallySorted</td><td>1,726,837.3 ns</td><td>46,593.23 ns</td><td>24,369.16 ns</td><td>-</td><td>-</td><td>-</td><td>40001 B</td>
+</tr><tr><td>QuickSort</td><td>1000000</td><td>PartiallySorted</td><td>1,410,681.2 ns</td><td>382,604.91 ns</td><td>253,069.46 ns</td><td>5.0000</td><td>5.0000</td><td>5.0000</td><td>80014 B</td>
+</tr><tr><td>HeapSort</td><td>1000000</td><td>ManyDuplicates</td><td>1,488,347.2 ns</td><td>434,603.51 ns</td><td>287,463.31 ns</td><td>2.0000</td><td>2.0000</td><td>2.0000</td><td>40011 B</td>
+</tr><tr><td>SmoothSort</td><td>1000000</td><td>ManyDuplicates</td><td>2,702,761.8 ns</td><td>1,015,796.29 ns</td><td>671,886.35 ns</td><td>-</td><td>-</td><td>-</td><td>40001 B</td>
+</tr><tr><td>QuickSort</td><td>1000000</td><td>ManyDuplicates</td><td>1,598,111.9 ns</td><td>483,337.87 ns</td><td>319,698.07 ns</td><td>5.7143</td><td>5.7143</td><td>5.7143</td><td>80001 B</td>
+</tr></tbody></table>
+
+<img width="800px" src="DiagramRes_2.png" alt="">
+
+<img width="800px" src="DiagramRes_3.png" alt="">
+
+</body>
+</html>

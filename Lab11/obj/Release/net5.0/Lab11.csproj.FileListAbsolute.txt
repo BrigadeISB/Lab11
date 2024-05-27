@@ -93,3 +93,4 @@ D:\Documents\ТА\Lab11\Lab11\obj\Release\net5.0\refint\Lab11.dll
 D:\Documents\ТА\Lab11\Lab11\obj\Release\net5.0\Lab11.pdb
 D:\Documents\ТА\Lab11\Lab11\obj\Release\net5.0\Lab11.genruntimeconfig.cache
 D:\Documents\ТА\Lab11\Lab11\obj\Release\net5.0\ref\Lab11.dll
+D:\Documents\ТА\Lab11\Lab11\obj\Release\net5.0\Lab11.sourcelink.json

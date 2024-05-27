@@ -4,37 +4,64 @@ BenchmarkDotNet v0.13.12, Windows 10 (10.0.19045.4412/22H2/2022Update)
 12th Gen Intel Core i5-12450H, 1 CPU, 12 logical and 8 physical cores
 .NET SDK 9.0.100-preview.3.24204.13
   [Host]     : .NET 5.0.17 (5.0.1722.21314), X64 RyuJIT AVX2
-  Job-CMFRRR : .NET 5.0.17 (5.0.1722.21314), X64 RyuJIT AVX2
+  Job-GMMAEE : .NET 5.0.17 (5.0.1722.21314), X64 RyuJIT AVX2
 
 IterationCount=10  RunStrategy=Throughput  WarmupCount=5  
 
 ```
-| Method     | N    | ArrayType       | Mean       | Error    | StdDev   | Gen0   | Allocated |
-|----------- |----- |---------------- |-----------:|---------:|---------:|-------:|----------:|
-| **HeapSort**   | **1000** | **Random**          |   **274.2 ns** |  **6.15 ns** |  **4.07 ns** | **0.0061** |      **40 B** |
-| SmoothSort | 1000 | Random          |   688.5 ns | 12.45 ns |  8.24 ns | 0.0061 |      40 B |
-| QuickSort  | 1000 | Random          |   275.6 ns |  2.72 ns |  1.80 ns | 0.0125 |      80 B |
-| **HeapSort**   | **1000** | **PartiallySorted** |   **275.0 ns** |  **0.72 ns** |  **0.43 ns** | **0.0061** |      **40 B** |
-| SmoothSort | 1000 | PartiallySorted |   601.7 ns | 17.28 ns | 10.28 ns | 0.0061 |      40 B |
-| QuickSort  | 1000 | PartiallySorted |   239.5 ns |  2.27 ns |  1.50 ns | 0.0125 |      80 B |
-| **HeapSort**   | **1000** | **ManyDuplicates**  |   **269.8 ns** |  **3.89 ns** |  **2.57 ns** | **0.0061** |      **40 B** |
-| SmoothSort | 1000 | ManyDuplicates  |   684.4 ns |  4.93 ns |  3.26 ns | 0.0061 |      40 B |
-| QuickSort  | 1000 | ManyDuplicates  |   227.8 ns |  1.04 ns |  0.69 ns | 0.0125 |      80 B |
-| **HeapSort**   | **2500** | **Random**          | **1,212.1 ns** |  **1.40 ns** |  **0.73 ns** | **0.0159** |     **100 B** |
-| SmoothSort | 2500 | Random          | 2,428.5 ns | 13.52 ns |  8.04 ns | 0.0146 |     100 B |
-| QuickSort  | 2500 | Random          | 1,590.7 ns | 13.89 ns |  9.18 ns | 0.0317 |     200 B |
-| **HeapSort**   | **2500** | **PartiallySorted** | **1,118.7 ns** |  **2.36 ns** |  **1.56 ns** | **0.0159** |     **100 B** |
-| SmoothSort | 2500 | PartiallySorted | 2,219.1 ns | 31.69 ns | 18.86 ns | 0.0146 |     100 B |
-| QuickSort  | 2500 | PartiallySorted | 1,218.4 ns |  6.98 ns |  4.62 ns | 0.0317 |     200 B |
-| **HeapSort**   | **2500** | **ManyDuplicates**  | **1,225.6 ns** |  **5.11 ns** |  **3.04 ns** | **0.0146** |     **100 B** |
-| SmoothSort | 2500 | ManyDuplicates  | 2,533.5 ns | 79.66 ns | 52.69 ns | 0.0146 |     100 B |
-| QuickSort  | 2500 | ManyDuplicates  | 1,358.3 ns | 19.01 ns |  9.94 ns | 0.0317 |     200 B |
-| **HeapSort**   | **5000** | **Random**          | **2,963.5 ns** | **24.16 ns** | **15.98 ns** | **0.0293** |     **200 B** |
-| SmoothSort | 5000 | Random          | 5,528.3 ns | 39.86 ns | 23.72 ns | 0.0293 |     200 B |
-| QuickSort  | 5000 | Random          | 3,857.5 ns | 25.19 ns | 14.99 ns | 0.0635 |     401 B |
-| **HeapSort**   | **5000** | **PartiallySorted** | **2,653.8 ns** | **10.13 ns** |  **6.70 ns** | **0.0293** |     **200 B** |
-| SmoothSort | 5000 | PartiallySorted | 4,982.5 ns | 55.30 ns | 36.58 ns | 0.0293 |     200 B |
-| QuickSort  | 5000 | PartiallySorted | 3,367.0 ns | 11.85 ns |  7.84 ns | 0.0635 |     401 B |
-| **HeapSort**   | **5000** | **ManyDuplicates**  | **2,932.2 ns** |  **8.80 ns** |  **5.24 ns** | **0.0293** |     **200 B** |
-| SmoothSort | 5000 | ManyDuplicates  | 5,568.5 ns | 29.68 ns | 15.53 ns | 0.0293 |     200 B |
-| QuickSort  | 5000 | ManyDuplicates  | 3,273.1 ns |  9.78 ns |  6.47 ns | 0.0635 |     401 B |
+| Method     | N       | ArrayType       | Mean           | Error           | StdDev        | Gen0   | Gen1   | Gen2   | Allocated |
+|----------- |-------- |---------------- |---------------:|----------------:|--------------:|-------:|-------:|-------:|----------:|
+| **HeapSort**   | **1000**    | **Random**          |       **316.3 ns** |        **19.18 ns** |      **12.68 ns** | **0.0061** |      **-** |      **-** |      **40 B** |
+| SmoothSort | 1000    | Random          |       784.0 ns |        62.07 ns |      41.06 ns | 0.0061 |      - |      - |      40 B |
+| QuickSort  | 1000    | Random          |       242.0 ns |        10.83 ns |       6.44 ns | 0.0125 |      - |      - |      80 B |
+| **HeapSort**   | **1000**    | **PartiallySorted** |       **316.0 ns** |        **30.94 ns** |      **16.18 ns** | **0.0061** |      **-** |      **-** |      **40 B** |
+| SmoothSort | 1000    | PartiallySorted |       802.2 ns |       282.98 ns |     187.17 ns | 0.0061 |      - |      - |      40 B |
+| QuickSort  | 1000    | PartiallySorted |       552.8 ns |       265.39 ns |     175.54 ns | 0.0125 |      - |      - |      80 B |
+| **HeapSort**   | **1000**    | **ManyDuplicates**  |       **313.8 ns** |        **27.25 ns** |      **14.25 ns** | **0.0061** |      **-** |      **-** |      **40 B** |
+| SmoothSort | 1000    | ManyDuplicates  |       984.0 ns |       326.43 ns |     215.91 ns | 0.0061 |      - |      - |      40 B |
+| QuickSort  | 1000    | ManyDuplicates  |       433.8 ns |       188.34 ns |      98.51 ns | 0.0125 |      - |      - |      80 B |
+| **HeapSort**   | **5000**    | **Random**          |     **4,017.5 ns** |     **1,084.17 ns** |     **717.11 ns** | **0.0293** |      **-** |      **-** |     **200 B** |
+| SmoothSort | 5000    | Random          |     6,799.8 ns |     1,657.70 ns |   1,096.47 ns | 0.0293 |      - |      - |     200 B |
+| QuickSort  | 5000    | Random          |     5,136.8 ns |     1,086.12 ns |     718.40 ns | 0.0635 |      - |      - |     400 B |
+| **HeapSort**   | **5000**    | **PartiallySorted** |     **3,916.1 ns** |     **1,282.49 ns** |     **848.29 ns** | **0.0293** |      **-** |      **-** |     **200 B** |
+| SmoothSort | 5000    | PartiallySorted |     6,453.4 ns |     2,082.92 ns |   1,377.72 ns | 0.0293 |      - |      - |     200 B |
+| QuickSort  | 5000    | PartiallySorted |     4,689.6 ns |     1,093.03 ns |     722.97 ns | 0.0635 |      - |      - |     400 B |
+| **HeapSort**   | **5000**    | **ManyDuplicates**  |     **4,360.2 ns** |     **1,067.67 ns** |     **706.20 ns** | **0.0293** |      **-** |      **-** |     **200 B** |
+| SmoothSort | 5000    | ManyDuplicates  |     8,544.9 ns |     1,510.13 ns |     998.86 ns | 0.0293 |      - |      - |     200 B |
+| QuickSort  | 5000    | ManyDuplicates  |     5,428.0 ns |     1,685.35 ns |   1,114.75 ns | 0.0635 |      - |      - |     400 B |
+| **HeapSort**   | **25000**   | **Random**          |    **25,952.7 ns** |     **5,791.75 ns** |   **3,830.88 ns** | **0.2734** | **0.2734** | **0.2734** |    **1000 B** |
+| SmoothSort | 25000   | Random          |    51,618.4 ns |     9,775.90 ns |   6,466.15 ns | 0.2344 | 0.2344 | 0.2344 |    1000 B |
+| QuickSort  | 25000   | Random          |    37,573.3 ns |     4,612.56 ns |   3,050.93 ns | 0.5859 | 0.5859 | 0.5859 |    2000 B |
+| **HeapSort**   | **25000**   | **PartiallySorted** |    **20,237.4 ns** |     **1,640.11 ns** |     **857.81 ns** | **0.2734** | **0.2734** | **0.2734** |    **1000 B** |
+| SmoothSort | 25000   | PartiallySorted |    44,619.2 ns |     8,496.47 ns |   5,619.89 ns | 0.2734 | 0.2734 | 0.2734 |    1000 B |
+| QuickSort  | 25000   | PartiallySorted |    25,807.6 ns |     6,675.49 ns |   4,415.42 ns | 0.5859 | 0.5859 | 0.5859 |    2000 B |
+| **HeapSort**   | **25000**   | **ManyDuplicates**  |    **20,214.7 ns** |     **1,363.60 ns** |     **713.19 ns** | **0.2734** | **0.2734** | **0.2734** |    **1000 B** |
+| SmoothSort | 25000   | ManyDuplicates  |    49,449.6 ns |     7,764.74 ns |   4,620.67 ns | 0.2734 | 0.2734 | 0.2734 |    1000 B |
+| QuickSort  | 25000   | ManyDuplicates  |    29,429.5 ns |     7,392.39 ns |   4,889.61 ns | 0.5859 | 0.5859 | 0.5859 |    2000 B |
+| **HeapSort**   | **50000**   | **Random**          |    **49,740.6 ns** |    **12,885.82 ns** |   **8,523.17 ns** | **0.5469** | **0.5469** | **0.5469** |    **2000 B** |
+| SmoothSort | 50000   | Random          |   111,601.8 ns |    11,385.38 ns |   6,775.26 ns | 0.5469 | 0.5469 | 0.5469 |    2000 B |
+| QuickSort  | 50000   | Random          |    70,073.6 ns |    16,797.58 ns |  11,110.56 ns | 1.1719 | 1.1719 | 1.1719 |    4000 B |
+| **HeapSort**   | **50000**   | **PartiallySorted** |    **37,434.1 ns** |     **1,580.00 ns** |     **826.37 ns** | **0.5469** | **0.5469** | **0.5469** |    **2000 B** |
+| SmoothSort | 50000   | PartiallySorted |    96,577.6 ns |    17,931.55 ns |  11,860.61 ns | 0.5469 | 0.5469 | 0.5469 |    2000 B |
+| QuickSort  | 50000   | PartiallySorted |    57,454.0 ns |    15,636.37 ns |  10,342.49 ns | 1.1719 | 1.1719 | 1.1719 |    4000 B |
+| **HeapSort**   | **50000**   | **ManyDuplicates**  |    **49,725.6 ns** |    **11,610.96 ns** |   **7,679.93 ns** | **0.5469** | **0.5469** | **0.5469** |    **2000 B** |
+| SmoothSort | 50000   | ManyDuplicates  |   111,400.4 ns |    11,922.00 ns |   7,885.67 ns | 0.5469 | 0.5469 | 0.5469 |    2000 B |
+| QuickSort  | 50000   | ManyDuplicates  |    62,795.5 ns |    14,468.20 ns |   9,569.82 ns | 1.1719 | 1.1719 | 1.1719 |    4000 B |
+| **HeapSort**   | **100000**  | **Random**          |   **108,808.8 ns** |    **32,015.58 ns** |  **21,176.32 ns** | **1.0938** | **1.0938** | **1.0938** |    **4000 B** |
+| SmoothSort | 100000  | Random          |   159,164.0 ns |     1,251.18 ns |     654.39 ns | 0.9375 | 0.9375 | 0.9375 |    4000 B |
+| QuickSort  | 100000  | Random          |   150,980.3 ns |    34,329.61 ns |  22,706.91 ns | 2.3438 | 2.3438 | 2.3438 |    8001 B |
+| **HeapSort**   | **100000**  | **PartiallySorted** |    **82,984.4 ns** |     **5,836.77 ns** |   **3,052.74 ns** | **1.0938** | **1.0938** | **1.0938** |    **4000 B** |
+| SmoothSort | 100000  | PartiallySorted |   209,238.5 ns |    31,079.01 ns |  20,556.84 ns | 1.0938 | 1.0938 | 1.0938 |    4000 B |
+| QuickSort  | 100000  | PartiallySorted |   127,004.5 ns |    31,980.01 ns |  21,152.80 ns | 2.3438 | 2.3438 | 2.3438 |    8001 B |
+| **HeapSort**   | **100000**  | **ManyDuplicates**  |   **110,448.5 ns** |    **29,467.47 ns** |  **19,490.90 ns** | **1.0938** | **1.0938** | **1.0938** |    **4000 B** |
+| SmoothSort | 100000  | ManyDuplicates  |   165,196.6 ns |     8,655.17 ns |   4,526.82 ns | 0.9375 | 0.9375 | 0.9375 |    4000 B |
+| QuickSort  | 100000  | ManyDuplicates  |   132,320.2 ns |    28,556.77 ns |  18,888.54 ns | 2.3438 | 2.3438 | 2.3438 |    8001 B |
+| **HeapSort**   | **1000000** | **Random**          | **1,211,481.2 ns** |    **55,167.44 ns** |  **28,853.64 ns** |      **-** |      **-** |      **-** |   **40001 B** |
+| SmoothSort | 1000000 | Random          | 2,622,555.0 ns |   887,653.07 ns | 587,127.54 ns |      - |      - |      - |   40001 B |
+| QuickSort  | 1000000 | Random          | 1,607,046.9 ns |   345,864.43 ns | 228,767.91 ns | 5.7143 | 5.7143 | 5.7143 |   80016 B |
+| **HeapSort**   | **1000000** | **PartiallySorted** | **1,116,392.9 ns** |   **321,499.95 ns** | **212,652.31 ns** | **2.0000** | **2.0000** | **2.0000** |   **40001 B** |
+| SmoothSort | 1000000 | PartiallySorted | 1,726,837.3 ns |    46,593.23 ns |  24,369.16 ns |      - |      - |      - |   40001 B |
+| QuickSort  | 1000000 | PartiallySorted | 1,410,681.2 ns |   382,604.91 ns | 253,069.46 ns | 5.0000 | 5.0000 | 5.0000 |   80014 B |
+| **HeapSort**   | **1000000** | **ManyDuplicates**  | **1,488,347.2 ns** |   **434,603.51 ns** | **287,463.31 ns** | **2.0000** | **2.0000** | **2.0000** |   **40011 B** |
+| SmoothSort | 1000000 | ManyDuplicates  | 2,702,761.8 ns | 1,015,796.29 ns | 671,886.35 ns |      - |      - |      - |   40001 B |
+| QuickSort  | 1000000 | ManyDuplicates  | 1,598,111.9 ns |   483,337.87 ns | 319,698.07 ns | 5.7143 | 5.7143 | 5.7143 |   80001 B |
